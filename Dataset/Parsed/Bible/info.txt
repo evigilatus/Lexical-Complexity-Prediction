@@ -1,0 +1,11 @@
+Only nouns (word = noun)
+Unique nouns: 9405
+
+FILES:
+bible_single_words.tsv - all words (but one instance for a sentence): 178 304 records
+bible_single_words_up_to_5.tsv - up to 5 instances of a word: 28 578 records (the first 5 in the original file bible.txt)
+
+FORMAT:
+<sentence><tab><word>
+
+Sorted by <word>
