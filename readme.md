@@ -28,14 +28,18 @@
 
  - Task 1
    - [website](https://sites.google.com/view/lcpsharedtask2021)
+   - [Codalab competition page](https://competitions.codalab.org/competitions/27420)
    - [trial and training data, with password "YellowDolphin73!"](https://github.com/MMU-TDMLab/CompLex)
  - [Paper](https://arxiv.org/pdf/2003.07008.pdf)
  - Lexical corpora
    - [bible-corpus](https://github.com/christos-c/bible-corpus)
    - [CRAFT corpus](https://github.com/UCDenver-ccp/CRAFT)
    - [Europarl](https://www.statmt.org/europarl/)
+   - [word frequency (used in task repo)](https://www.ugent.be/pp/experimentele-psychologie/en/research/documents/subtlexus)
  - Linear regression lexical classifier
    - [GloVe](https://nlp.stanford.edu/projects/glove/)
    - [InferSent](https://github.com/facebookresearch/InferSent)
    - [Syllables package](https://pypi.org/project/syllables/)
- - [Bert](https://github.com/google-research/bert)
+ - BERT:
+   - [Bert repo](https://github.com/google-research/bert)
+   - [notes](/bert/notes)
