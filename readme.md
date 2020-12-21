@@ -49,5 +49,5 @@
    - [Datasets](https://www.inf.uni-hamburg.de/en/inst/ab/lt/resources/data/complex-word-identification-dataset.html)
    - [Findings report](https://www.aclweb.org/anthology/W18-0507.pdf)
    - [Results](https://www.researchgate.net/publication/325591648_Complex_Word_Identification_Shared_Task_2018)
-   - [Code] (https://github.com/siangooding/cwi_2018)
+   - [Code](https://github.com/siangooding/cwi_2018)
    
