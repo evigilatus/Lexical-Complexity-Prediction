@@ -43,3 +43,9 @@
  - BERT:
    - [Bert repo](https://github.com/google-research/bert)
    - [notes](/bert/notes)
+ - Complex Word Identification (CWI) 2018:
+   - [website](https://sites.google.com/view/cwisharedtask2018/)
+   - [Paper - winners](https://www.aclweb.org/anthology/W18-0520.pdf)
+   - [Datasets](https://www.inf.uni-hamburg.de/en/inst/ab/lt/resources/data/complex-word-identification-dataset.html)
+   - [Report of findings](https://www.aclweb.org/anthology/W18-0507.pdf)
+   
