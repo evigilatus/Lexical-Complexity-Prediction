@@ -50,4 +50,6 @@
    - [Findings report](https://www.aclweb.org/anthology/W18-0507.pdf)
    - [Results](https://www.researchgate.net/publication/325591648_Complex_Word_Identification_Shared_Task_2018)
    - [Code](https://github.com/siangooding/cwi_2018)
-   
+ 
+### Разширен dataset и други файлове относно dataset-a
+ - [Dataset](https://drive.google.com/drive/folders/1jyVOeiTkzEAxqKRhs61_rfoxC3W4fNHa?usp=sharing)
