@@ -1,4 +1,26 @@
 # Bert: Research Notes
+
+## Команди за създаване на средата
+Създаване на среда в Анаконда:
+```shell
+conda create -n lcp python=3.8
+conda activate lcp
+```
+Инсталиране на PyTorch
+```shell
+conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
+```
+
+Инсталиране на хъгинг фейс трансформер.
+```shell
+conda install -c huggingface transformers
+```
+
+Тестване, че инсталациите са минали гладко.
+```shell
+python -c "from transformers import pipeline; print(pipeline('sentiment-analysis')('we love you'))"
+```
+
 ## Фактоиди
 Бърт изисква .тсв дата като има и специален формат, в който приема данните: ид, стринг, константа (буква), етикет. Може да не е универсално правило.
 
