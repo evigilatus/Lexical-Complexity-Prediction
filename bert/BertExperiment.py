@@ -29,10 +29,6 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 train_single_tsv = 'dataset/train/lcp_single_train.tsv'
 df_train_single = pd.read_csv(train_single_tsv, sep='\t', header=0)
 
-
-# In[11]:
-
-
 print("Data columns: \n")
 print(df_train_single.columns)
 print("Total corpus len: {}".format(len(df_train_single)))
@@ -40,42 +36,19 @@ print("Subcorpus len:\n")
 print(df_train_single['corpus'].value_counts())
 
 
-# In[13]:
-
-
 class Bert(nn.Module):
-
     def __init__(self):
         super(Bert, self).__init__()
         
         self.encoder = BertModel.from_pretrained("bert-base-uncased")
-        self.fc1 = nn.Linear(9216, 1)
+        self.fc1 = nn.Linear(256, 1)
         self.softmax = nn.Softmax(dim = 0) 
-        
 
     def forward(self, input_ids, attention_mask, token_type_ids):
         last_hidden_state, _ = self.encoder(input_ids=input_ids, attention_mask=attention_mask, token_type_ids=token_type_ids)[:2]
         # TODO Add fc1
         flatten_state = torch.flatten(last_hidden_state)
         return self.softmax(flatten_state.float())
-
-
-
-bert = Bert()
-# tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
-# tokenizer('Test me you mf bitch!', return_tensors='pt')
-
-# encoder = BertModel.from_pretrained("bert-base-uncased")
-# r = tokenizer('Test me you mf bitch!', return_tensors='pt')
-# print(r['input_ids'][0].shape)
-# print(r['attention_mask'][0].shape)
-# print(r['token_type_ids'][0].shape)
-# encoder(r['input_ids'][0], r['attention_mask'][0], r['token_type_ids'][0])
-
-# first, second = encoder(**tokenizer('Test me you mf bitch!', return_tensors='pt'), return_dict=True)[:2]
-# print("first", first.shape, sep="\n")
-
-# In[17]:
 
 
 torch_t = torch.tensor([[1,2,5,3], [1,2,2, 5]])
@@ -120,7 +93,7 @@ print(tokens[3726])
 
 #x y for word counting in sentence
 list_sentences = df_train_single["sentence"].tolist()
-max_sent_len = 60
+max_sent_len = 64
 x = tokenizer(list_sentences, padding=True, truncation=True, max_length=max_sent_len, return_tensors='pt')
 y = [min(len(i.split()), max_sent_len) for i in list_sentences]
 
@@ -149,9 +122,6 @@ print(x['token_type_ids'][0].shape)
 from torch.utils.data import Dataset
 
 class WordcountDataset(Dataset):
-    def __init__(self):
-        pass
-    
     def __len__(self):
         return len(df_train_single)
     
@@ -197,28 +167,32 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 import time
 
-criterion = nn.MSELoss()
-EPOCHS = 30
-BATCH_SIZE = 64
-optm = Adam(bert.parameters(), lr = 0.001)
+def main(bert):
+    criterion = nn.MSELoss()
+    EPOCHS = 5
+    BATCH_SIZE = 128
+    optm = Adam(bert.parameters(), lr = 0.001)
 
-data_train = DataLoader(dataset = dataset, batch_size = BATCH_SIZE, shuffle = True)
+    data_train = DataLoader(dataset = dataset, batch_size = BATCH_SIZE, shuffle = True)
 
-for epoch in range(EPOCHS):
-    epoch_loss = 0
-    correct = 0
-    
-    for bidx, batch in enumerate(data_train):
-        
-        input_ids = batch['input_ids']
-        token_ids = batch['token_ids']
-        attention_mask = batch['attention_mask']
-        out = batch['out']
-        
-        #start = time.time()
-        loss, predictions = train(bert, input_ids, attention_mask, token_ids, out, optm, criterion)
-        epoch_loss+=loss
-        #print("Predict time: {}".format(time.time() - start))
-        
-    print('Epoch {} Loss : {}'.format((epoch+1),epoch_loss))
+    for epoch in range(EPOCHS):
+        epoch_loss = 0
+        correct = 0
 
+        for bidx, batch in enumerate(data_train):
+        
+            input_ids = batch['input_ids']
+            token_ids = batch['token_ids']
+            attention_mask = batch['attention_mask']
+            out = batch['out']
+
+            #start = time.time()
+            loss, predictions = train(bert, input_ids, attention_mask, token_ids, out, optm, criterion)
+            epoch_loss+=loss
+            #print("Predict time: {}".format(time.time() - start))
+        
+        print('Epoch {} Loss : {}'.format((epoch+1),epoch_loss))
+
+if __name__ == "__main__":
+    bert = Bert()
+    main(bert)
