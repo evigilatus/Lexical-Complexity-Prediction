@@ -26,7 +26,7 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 # In[9]:
 
 
-train_single_tsv = 'train/lcp_single_train.tsv'
+train_single_tsv = 'dataset/train/lcp_single_train.tsv'
 df_train_single = pd.read_csv(train_single_tsv, sep='\t', header=0)
 
 
