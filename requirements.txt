@@ -1,0 +1,70 @@
+astroid @ file:///C:/ci/astroid_1592487315634/work
+backcall==0.2.0
+brotlipy==0.7.0
+certifi==2020.12.5
+cffi @ file:///C:/ci/cffi_1606255208697/work
+chardet @ file:///C:/ci/chardet_1607690654534/work
+click==7.1.2
+colorama @ file:///tmp/build/80754af9/colorama_1607707115595/work
+cryptography @ file:///C:/ci/cryptography_1607637849569/work
+cycler==0.10.0
+decorator==4.4.2
+filelock==3.0.12
+idna @ file:///tmp/build/80754af9/idna_1593446292537/work
+ipykernel @ file:///C:/ci/ipykernel_1596190155316/work/dist/ipykernel-5.3.4-py3-none-any.whl
+ipython @ file:///C:/ci/ipython_1604083276484/work
+ipython-genutils @ file:///tmp/build/80754af9/ipython_genutils_1606773439826/work
+isort @ file:///tmp/build/80754af9/isort_1602603989581/work
+jedi @ file:///C:/ci/jedi_1608920753641/work
+joblib @ file:///tmp/build/80754af9/joblib_1607970656719/work
+jupyter-client @ file:///tmp/build/80754af9/jupyter_client_1601311786391/work
+jupyter-core @ file:///C:/ci/jupyter_core_1606149073702/work
+kiwisolver @ file:///C:/ci/kiwisolver_1604014703538/work
+lazy-object-proxy @ file:///C:/b/work
+matplotlib @ file:///C:/ci/matplotlib-base_1603355780617/work
+mccabe==0.6.1
+mkl-fft==1.2.0
+mkl-random==1.1.1
+mkl-service==2.3.0
+numpy @ file:///C:/ci/numpy_and_numpy_base_1603466732592/work
+olefile==0.46
+packaging @ file:///tmp/build/80754af9/packaging_1607971725249/work
+pandas @ file:///C:/ci/pandas_1609008050392/work
+parso==0.7.0
+pickleshare @ file:///tmp/build/80754af9/pickleshare_1606932040724/work
+Pillow @ file:///C:/ci/pillow_1603823068645/work
+prompt-toolkit @ file:///tmp/build/80754af9/prompt-toolkit_1602688806899/work
+protobuf==3.13.0
+pycparser @ file:///tmp/build/80754af9/pycparser_1594388511720/work
+Pygments @ file:///tmp/build/80754af9/pygments_1607368905949/work
+pylint @ file:///C:/ci/pylint_1598617153160/work
+pyOpenSSL @ file:///tmp/build/80754af9/pyopenssl_1608057966937/work
+pyparsing==2.4.7
+PySocks @ file:///C:/ci/pysocks_1605287845585/work
+python-dateutil==2.8.1
+pytz @ file:///tmp/build/80754af9/pytz_1608922264688/work
+pywin32==227
+pyzmq==20.0.0
+regex @ file:///C:/ci/regex_1606691183008/work
+requests @ file:///tmp/build/80754af9/requests_1608241421344/work
+sacremoses==0.0.43
+scikit-learn @ file:///C:/ci/scikit-learn_1598377018496/work
+scipy @ file:///C:/ci/scipy_1604596260408/work
+sip==4.19.13
+six @ file:///C:/ci/six_1605187374963/work
+threadpoolctl @ file:///tmp/tmp9twdgx9k/threadpoolctl-2.1.0-py3-none-any.whl
+tokenizers==0.9.4
+toml @ file:///tmp/build/80754af9/toml_1592853716807/work
+torch==1.7.1
+torchaudio==0.7.2
+torchvision==0.8.2
+tornado @ file:///C:/ci/tornado_1606942392901/work
+tqdm @ file:///tmp/build/80754af9/tqdm_1607369919789/work
+traitlets @ file:///tmp/build/80754af9/traitlets_1602787416690/work
+transformers==4.1.1
+typing-extensions @ file:///tmp/build/80754af9/typing_extensions_1598376058250/work
+urllib3 @ file:///tmp/build/80754af9/urllib3_1606938623459/work
+wcwidth @ file:///tmp/build/80754af9/wcwidth_1593447189090/work
+win-inet-pton @ file:///C:/ci/win_inet_pton_1605306167264/work
+wincertstore==0.2
+wrapt==1.11.2
