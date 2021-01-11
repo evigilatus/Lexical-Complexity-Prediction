@@ -30,7 +30,7 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 
 
 train_single_tsv = '../dataset/train/lcp_single_train.tsv'
-df_train_single = pd.read_csv(train_single_tsv, sep='\t', header=0)
+df_train_single = pd.read_csv(train_single_tsv, sep='\t', header=0, keep_default_na=False)
 
 # Filtering null values
 filtered_df = df_train_single[df_train_single['token'].notnull()]
@@ -119,7 +119,7 @@ class WordcountDataset(Dataset):
         return result
     
 dataset = WordcountDataset()
-print(dataset[500])
+# print(dataset[500])
 
 
 # In[98]:
