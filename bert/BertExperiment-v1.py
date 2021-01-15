@@ -16,6 +16,7 @@ import torch
 
 import torch.nn as nn
 from transformers import BertTokenizer, BertModel
+from transformers import RobertaTokenizer, RobertaModel
 
 # Training
 
@@ -40,46 +41,38 @@ df_train_single = filtered_df
 print('\nDataframe length after filtering null values: ', len(df_train_single))
 
 
-max_sent_len = 60
-bert_hidden_size = 768
+max_sent_len = 128
+model_hidden_size = 768
 
-class Bert(nn.Module):
+class Roberta(nn.Module):
 
     def __init__(self):
-        super(Bert, self).__init__()
+        super(Roberta, self).__init__()
 
-
-
-        self.encoder = BertModel.from_pretrained("bert-base-uncased")
-        self.fc1 = nn.Linear(max_sent_len * bert_hidden_size, 200)
+        self.encoder = RobertaModel.from_pretrained("roberta-base")
+        self.fc1 = nn.Linear(max_sent_len * model_hidden_size, 200)
         self.fc2 = nn.Linear(200, 1)
         self.softmax = nn.Softmax(dim = 0) 
         
 
-    def forward(self, input_ids, attention_mask, token_type_ids):
+    def forward(self, input_ids, attention_mask, token_type_ids=None):
         last_hidden_state, _ = self.encoder(input_ids=input_ids, attention_mask=attention_mask, token_type_ids=token_type_ids)[:2]
         b_size = last_hidden_state.shape[0]
         seq_len = last_hidden_state.shape[1]
-        bert_hidden_size = last_hidden_state.shape[2]
+        model_hidden_size = last_hidden_state.shape[2]
 
-        last_hidden_state = last_hidden_state.reshape(b_size, seq_len * bert_hidden_size)
+        last_hidden_state = last_hidden_state.reshape(b_size, seq_len * model_hidden_size)
 
         x = self.fc1(last_hidden_state)
         x = self.fc2(x)
 
         return self.softmax(x)
 
-    
 
-bert = Bert()
-tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
+model = Roberta()
+tokenizer = RobertaTokenizer.from_pretrained("roberta-base")
+# tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 tokenizer('Test me you mf bitch!', return_tensors='pt')
-
-
-# In[77]:
-
-
-tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 
 
 #x y for word counting in sentence
@@ -88,8 +81,6 @@ tokens = df_train_single['token'].tolist()
 # Check for max sentence length instead of hardcoded 60
 input_data = tokenizer(list_sentences, tokens, padding=True, truncation=True, max_length=max_sent_len, return_tensors='pt')
 target_data = df_train_single['complexity']
-
-
 
 
 from torch.utils.data import Dataset
@@ -103,21 +94,21 @@ class WordcountDataset(Dataset):
     
     def __getitem__(self, idx):
         input_ids = input_data['input_ids'][idx]
-        token_type_ids = input_data['token_type_ids'][idx]
+        token_type_ids = [], # input_data['token_type_ids'][idx]
         attention_masks = input_data['attention_mask'][idx]
         out = target_data[idx]
         
         
         result = {
             'input_ids': torch.from_numpy(np.array(input_ids)).long(),
-            'token_ids': torch.from_numpy(np.array(token_type_ids)).long(),
+            'token_ids': [], # torch.from_numpy(np.array(token_type_ids)).long(),
             'attention_mask': torch.from_numpy(np.array(attention_masks)).float(),
             'out': torch.from_numpy(np.array([out])).float()
         }
         
         #print("Idx {} fetch time: {}".format(idx, time.time() - start))
         return result
-    
+
 dataset = WordcountDataset()
 # print(dataset[500])
 
@@ -127,7 +118,7 @@ dataset = WordcountDataset()
 
 def train(model, input_ids, attention_mask, token_ids, y, optimizer, criterion):
     model.zero_grad()
-    output = model(input_ids=input_ids, attention_mask=attention_mask, token_type_ids=token_ids)
+    output = model(input_ids=input_ids, attention_mask=attention_mask) #, token_type_ids=token_ids)
     loss = criterion(output,y)
     loss.backward()
     optimizer.step()
@@ -146,7 +137,7 @@ import time
 criterion = nn.MSELoss()
 EPOCHS = 10
 BATCH_SIZE = 8
-optm = Adam(bert.parameters(), lr = 0.001)
+optm = Adam(model.parameters(), lr = 0.001)
 
 data_train = DataLoader(dataset = dataset, batch_size = BATCH_SIZE, shuffle = True)
 
@@ -163,7 +154,7 @@ for epoch in range(EPOCHS):
         
         
         #start = time.time()
-        loss, predictions = train(bert,input_ids, attention_mask, token_ids, out, optm, criterion)
+        loss, predictions = train(model,input_ids, attention_mask, token_ids, out, optm, criterion)
         epoch_loss+=loss
         #print("Predict time: {}".format(time.time() - start))
         
