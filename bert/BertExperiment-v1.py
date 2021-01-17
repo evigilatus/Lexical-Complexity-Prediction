@@ -41,7 +41,7 @@ df_train_single = filtered_df
 print('\nDataframe length after filtering null values: ', len(df_train_single))
 
 
-max_sent_len = 128
+max_sent_len = 16
 model_hidden_size = 768
 
 class Roberta(nn.Module):
@@ -50,7 +50,7 @@ class Roberta(nn.Module):
         super(Roberta, self).__init__()
 
         self.encoder = RobertaModel.from_pretrained("roberta-base")
-        self.fc1 = nn.Linear(max_sent_len * model_hidden_size, 200)
+        self.fc1 = nn.Linear(max_sent_len * model_hidden_size//2, 200)
         self.fc2 = nn.Linear(200, 1)
         self.softmax = nn.Softmax(dim = 0) 
         
@@ -72,14 +72,15 @@ class Roberta(nn.Module):
 model = Roberta()
 tokenizer = RobertaTokenizer.from_pretrained("roberta-base")
 # tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-tokenizer('Test me you mf bitch!', return_tensors='pt')
+# tokenizer('Test me you mf bitch!', return_tensors='pt')
 
 
 #x y for word counting in sentence
 list_sentences = df_train_single["sentence"].tolist()
 tokens = df_train_single['token'].tolist()
 # Check for max sentence length instead of hardcoded 60
-input_data = tokenizer(list_sentences, tokens, padding=True, truncation=True, max_length=max_sent_len, return_tensors='pt')
+# input_data = tokenizer(list_sentences, tokens, padding=True, truncation=True, max_length=max_sent_len, return_tensors='pt')
+input_data = tokenizer(tokens, padding=True, truncation=True, max_length=max_sent_len, return_tensors='pt')
 target_data = df_train_single['complexity']
 
 
