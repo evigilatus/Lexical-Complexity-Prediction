@@ -28,7 +28,7 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 train_single_tsv = '../dataset/train/lcp_single_train.tsv'
 df_train_single = pd.read_csv(train_single_tsv, sep='\t', header=0, keep_default_na=False)
 test_single_tsv = '../dataset/test/lcp_single_test.tsv'
-df_test_single = pd.read_csv(test_single_tsv, sep='\t', header=0)
+df_test_single = pd.read_csv(test_single_tsv, sep='\t', header=0, keep_default_na=False)
 
 
 max_sent_len = 18
@@ -70,6 +70,12 @@ tokens = df_train_single['token'].tolist()
 # input_data = tokenizer(list_sentences, tokens, padding=True, truncation=True, max_length=max_sent_len, return_tensors='pt')
 input_data = tokenizer(tokens, padding=True, truncation=True, max_length=max_sent_len, return_tensors='pt')
 target_data = df_train_single['complexity']
+
+# test dataset
+test_sentences = df_test_single["sentence"].tolist()
+test_tokens = df_test_single['token'].tolist()
+test_input_data = tokenizer(test_tokens, padding=True, truncation=True, max_length=max_sent_len, return_tensors='pt')
+test_target_data = df_test_single['complexity']
 
 
 from torch.utils.data import Dataset
@@ -123,6 +129,8 @@ optm = Adam(model.parameters(), lr = 0.001)
 
 dataset = WordcountDataset(input_data, target_data)
 data_train = DataLoader(dataset = dataset, batch_size = BATCH_SIZE, shuffle = True)
+test_dataset = WordcountDataset(test_input_data, test_target_data)
+data_test = DataLoader(dataset = test_dataset, batch_size = BATCH_SIZE, shuffle = True)
 
 for epoch in range(EPOCHS):
     epoch_loss = 0
@@ -149,7 +157,7 @@ for epoch in range(EPOCHS):
     for bidx, batch in enumerate(test_loader):
         #start = time.time()
         x_train = batch['inp']
-        y_pred.append(net(x_train))
+        y_pred.append(model(x_train))
 
     y_pred = [x.item() for i in range(len(y_pred)) for x in y_pred[i] ]
 
