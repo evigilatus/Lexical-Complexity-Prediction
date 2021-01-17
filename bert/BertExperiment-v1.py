@@ -3,12 +3,10 @@
 
 # #### Imports and dataset loading
 
-# In[1]:
-
 
 # Libraries
 import numpy as np
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import pandas as pd
 import torch
 
@@ -24,28 +22,19 @@ import torch.optim as optim
 
 # Evaluation
 
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
-
-
-# In[74]:
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, mean_squared_error, mean_absolute_error
 
 
 train_single_tsv = '../dataset/train/lcp_single_train.tsv'
 df_train_single = pd.read_csv(train_single_tsv, sep='\t', header=0, keep_default_na=False)
-
-# Filtering null values
-filtered_df = df_train_single[df_train_single['token'].notnull()]
-print('Initial dataframe length: ', len(df_train_single))
-print('Removing rows: \n', df_train_single.merge(filtered_df, how = 'outer' ,indicator=True).loc[lambda x : x['_merge']=='left_only'])
-df_train_single = filtered_df
-print('\nDataframe length after filtering null values: ', len(df_train_single))
+test_single_tsv = '../dataset/test/lcp_single_test.tsv'
+df_test_single = pd.read_csv(test_single_tsv, sep='\t', header=0)
 
 
-max_sent_len = 16
+max_sent_len = 18
 model_hidden_size = 768
 
 class Roberta(nn.Module):
-
     def __init__(self):
         super(Roberta, self).__init__()
 
@@ -72,7 +61,6 @@ class Roberta(nn.Module):
 model = Roberta()
 tokenizer = RobertaTokenizer.from_pretrained("roberta-base")
 # tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-# tokenizer('Test me you mf bitch!', return_tensors='pt')
 
 
 #x y for word counting in sentence
@@ -87,18 +75,18 @@ target_data = df_train_single['complexity']
 from torch.utils.data import Dataset
 
 class WordcountDataset(Dataset):
-    def __init__(self):
-        pass
-    
+    def __init__(self, input_data, target_data):
+        self.input_data = input_data
+        self.target_data = target_data
+
     def __len__(self):
         return len(df_train_single)
-    
+
     def __getitem__(self, idx):
-        input_ids = input_data['input_ids'][idx]
-        token_type_ids = [], # input_data['token_type_ids'][idx]
-        attention_masks = input_data['attention_mask'][idx]
-        out = target_data[idx]
-        
+        input_ids = self.input_data['input_ids'][idx]
+        token_type_ids = [], # self.input_data['token_type_ids'][idx]
+        attention_masks = self.input_data['attention_mask'][idx]
+        out = self.target_data[idx]
         
         result = {
             'input_ids': torch.from_numpy(np.array(input_ids)).long(),
@@ -107,14 +95,7 @@ class WordcountDataset(Dataset):
             'out': torch.from_numpy(np.array([out])).float()
         }
         
-        #print("Idx {} fetch time: {}".format(idx, time.time() - start))
         return result
-
-dataset = WordcountDataset()
-# print(dataset[500])
-
-
-# In[98]:
 
 
 def train(model, input_ids, attention_mask, token_ids, y, optimizer, criterion):
@@ -140,6 +121,7 @@ EPOCHS = 10
 BATCH_SIZE = 8
 optm = Adam(model.parameters(), lr = 0.001)
 
+dataset = WordcountDataset(input_data, target_data)
 data_train = DataLoader(dataset = dataset, batch_size = BATCH_SIZE, shuffle = True)
 
 for epoch in range(EPOCHS):
@@ -160,3 +142,16 @@ for epoch in range(EPOCHS):
         #print("Predict time: {}".format(time.time() - start))
         
     print('Epoch {} Loss : {}'.format((epoch+1),epoch_loss))
+    y_true = [test_dataset[i]['out'].item() for i in range(len(test_dataset))]
+    y_pred = []
+
+    test_loader = DataLoader(dataset = test_dataset, batch_size = BATCH_SIZE, shuffle = True)
+    for bidx, batch in enumerate(test_loader):
+        #start = time.time()
+        x_train = batch['inp']
+        y_pred.append(net(x_train))
+
+    y_pred = [x.item() for i in range(len(y_pred)) for x in y_pred[i] ]
+
+    mae = mean_absolute_error(y_true, y_pred)
+    print("MAE for test data: ", mae)
