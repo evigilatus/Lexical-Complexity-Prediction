@@ -31,15 +31,16 @@ test_single_tsv = '../dataset/trial/lcp_single_trial.tsv'
 df_test_single = pd.read_csv(test_single_tsv, sep='\t', header=0, keep_default_na=False)
 print(f"{len(df_train_single)=}\n{len(df_test_single)=}")
 
-max_sent_len = 72
-model_hidden_size = 768
+max_sent_len = 18
+model_hidden_size = 384
 
 class Roberta(nn.Module):
     def __init__(self):
         super(Roberta, self).__init__()
 
         self.encoder = RobertaModel.from_pretrained("roberta-base")
-        self.fc1 = nn.Linear((max_sent_len * model_hidden_size), 200)
+        self.matrix_len = max_sent_len * model_hidden_size
+        self.fc1 = nn.Linear(self.matrix_len, 200)
         self.fc2 = nn.Linear(200, 1)
         self.softmax = nn.Softmax(dim = 0) 
 
@@ -49,7 +50,9 @@ class Roberta(nn.Module):
         seq_len = last_hidden_state.shape[1]
         model_hidden_size = last_hidden_state.shape[2]
 
-        last_hidden_state = last_hidden_state.reshape(b_size, seq_len * model_hidden_size)
+        x_dimension = seq_len * model_hidden_size
+        y_dimension = self.matrix_len // x_dimension
+        last_hidden_state = last_hidden_state.reshape(b_size, (x_dimension * y_dimension))
 
         x = self.fc1(last_hidden_state)
         x = self.fc2(x)
@@ -123,7 +126,7 @@ import time
 
 criterion = nn.MSELoss()
 EPOCHS = 10
-BATCH_SIZE = 200
+BATCH_SIZE = 256
 optm = Adam(model.parameters(), lr = 0.001)
 
 dataset = WordcountDataset(input_data, target_data)
@@ -143,7 +146,6 @@ for epoch in range(EPOCHS):
         token_ids = batch['token_ids']
         attention_mask = batch['attention_mask']
         out = batch['out']
-        
         
         #start = time.time()
         loss, predictions = train(model,input_ids, attention_mask, token_ids, out, optm, criterion)
