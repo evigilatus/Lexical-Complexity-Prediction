@@ -27,11 +27,11 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 
 train_single_tsv = '../dataset/train/lcp_single_train.tsv'
 df_train_single = pd.read_csv(train_single_tsv, sep='\t', header=0, keep_default_na=False)
-test_single_tsv = '../dataset/test/lcp_single_test.tsv'
+test_single_tsv = '../dataset/trial/lcp_single_trial.tsv'
 df_test_single = pd.read_csv(test_single_tsv, sep='\t', header=0, keep_default_na=False)
+print(f"{len(df_train_single)=}\n{len(df_test_single)=}")
 
-
-max_sent_len = 18
+max_sent_len = 72
 model_hidden_size = 768
 
 class Roberta(nn.Module):
@@ -39,10 +39,9 @@ class Roberta(nn.Module):
         super(Roberta, self).__init__()
 
         self.encoder = RobertaModel.from_pretrained("roberta-base")
-        self.fc1 = nn.Linear(max_sent_len * model_hidden_size//2, 200)
+        self.fc1 = nn.Linear((max_sent_len * model_hidden_size), 200)
         self.fc2 = nn.Linear(200, 1)
         self.softmax = nn.Softmax(dim = 0) 
-        
 
     def forward(self, input_ids, attention_mask, token_type_ids=None):
         last_hidden_state, _ = self.encoder(input_ids=input_ids, attention_mask=attention_mask, token_type_ids=token_type_ids)[:2]
@@ -86,13 +85,13 @@ class WordcountDataset(Dataset):
         self.target_data = target_data
 
     def __len__(self):
-        return len(df_train_single)
+        return len(self.target_data)
 
     def __getitem__(self, idx):
         input_ids = self.input_data['input_ids'][idx]
         token_type_ids = [], # self.input_data['token_type_ids'][idx]
         attention_masks = self.input_data['attention_mask'][idx]
-        out = self.target_data[idx]
+        out = float(self.target_data[idx])
         
         result = {
             'input_ids': torch.from_numpy(np.array(input_ids)).long(),
@@ -124,7 +123,7 @@ import time
 
 criterion = nn.MSELoss()
 EPOCHS = 10
-BATCH_SIZE = 8
+BATCH_SIZE = 200
 optm = Adam(model.parameters(), lr = 0.001)
 
 dataset = WordcountDataset(input_data, target_data)
@@ -133,11 +132,13 @@ test_dataset = WordcountDataset(test_input_data, test_target_data)
 data_test = DataLoader(dataset = test_dataset, batch_size = BATCH_SIZE, shuffle = True)
 
 for epoch in range(EPOCHS):
+    print(f"{epoch=}")
     epoch_loss = 0
     correct = 0
     
     for bidx, batch in enumerate(data_train):
-        
+        if bidx % 10 == 0:
+            print(f"{bidx=}")
         input_ids = batch['input_ids']
         token_ids = batch['token_ids']
         attention_mask = batch['attention_mask']
@@ -155,9 +156,12 @@ for epoch in range(EPOCHS):
 
     test_loader = DataLoader(dataset = test_dataset, batch_size = BATCH_SIZE, shuffle = True)
     for bidx, batch in enumerate(test_loader):
+        if bidx % 10 == 0:
+            print(f"test {bidx=}")
         #start = time.time()
-        x_train = batch['inp']
-        y_pred.append(model(x_train))
+        inp_ids = batch['input_ids']
+        at_mask = batch['attention_mask']
+        y_pred.append(model(input_ids=inp_ids, attention_mask=at_mask))
 
     y_pred = [x.item() for i in range(len(y_pred)) for x in y_pred[i] ]
 
