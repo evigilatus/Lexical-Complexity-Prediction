@@ -43,6 +43,7 @@
  - BERT:
    - [Bert repo](https://github.com/google-research/bert)
    - [notes](/bert/notes)
+   - [Sentence-BERT](https://arxiv.org/pdf/1908.10084.pdf)
  - Complex Word Identification (CWI) 2018:
    - [website](https://sites.google.com/view/cwisharedtask2018/)
    - [Paper - winners](https://www.aclweb.org/anthology/W18-0520.pdf)
