@@ -26,7 +26,7 @@ id	subcorpus	sentence	token	complexity
 3ODOP6T3ASK1W4XFRJ5XQZ3V84B24K	bible	Then Solomon assembled the elders of Israel, and all the heads of the tribes, the princes of the fathers' households of the children of Israel, to king Solomon in Jerusalem, to bring up the ark of the covenant of Yahweh out of the city of David, which is Zion.	princes	0.10294117647058826
 3E22YV8GG16JAJ8RBMV5LLHOAVXPNO	bible	All the princes of the provinces, the satraps, the governors, and those who did the king's business helped the Jews, because the fear of Mordecai had fallen on them.	princes	0.18333333333333335
 3TRB893CSJAOULN5SWOTVFH69R6G75	bible	Yahweh showed me, and behold, two baskets of figs set before Yahweh's temple, after that Nebuchadnezzar king of Babylon had carried away captive Jeconiah the son of Jehoiakim, king of Judah, and the princes of Judah, with the craftsmen and smiths, from Jerusalem, and had brought them to Babylon.	princes	0.25
-3B0MCRZMBRUJD4K4R18XPAMJAAYPPK	bible	"'You shall not cut the hair on the sides of your heads, neither shall you clip off the edge of your beard.	beard	0.10714285714285715
+3B0MCRZMBRUJD4K4R18XPAMJAAYPPK	bible	You shall not cut the hair on the sides of your heads, neither shall you clip off the edge of your beard.	beard	0.10714285714285715
 3FO95NVK5C0129GBWAGGPAR9YC3SR5	bible	When the king came to see him, Amnon said to the king, "Please let my sister Tamar come, and make me a couple of cakes in my sight, that I may eat from her hand."	cakes	0.1111111111111111
 3V8JSVE8YYQ9PRNF9AO58PGR08SEYB	bible	Then Abigail hurried and took two hundred loaves of bread, two bottles of wine, five sheep ready dressed, five measures of parched grain, one hundred clusters of raisins, and two hundred cakes of figs, and laid them on donkeys.	cakes	0.28125
 3IZVJEBJ6AK5H245ZE7QA8XGP6FZ6D	bible	In arrogance, the wicked hunt down the weak.	hunt	0.11538461538461536
@@ -46,8 +46,8 @@ id	subcorpus	sentence	token	complexity
 3Z33IC0JC0MBQ11TWOLZ9CBMRUHV9G	bible	There was one Anna, a prophetess, the daughter of Phanuel, of the tribe of Asher (she was of a great age, having lived with a husband seven years from her virginity,	virginity	0.21666666666666667
 3K3IX1W4S6RCQ0E22IQ0ZFXOBOMPAS	bible	Neither has she left her prostitution since [the days of] Egypt; for in her youth they lay with her, and they handled the bosom of her virginity; and they poured out their prostitution on her.	virginity	0.25
 378G7J1SJLY50MSFU96HNSVBP0SEWC	bible	But if this thing be true, that the tokens of virginity were not found in the young lady;	virginity	0.3125
-3XH7ZM9YX2UJXUKCN4GP8FMJ6O59R2	bible	"You therefore put your belt on your waist, arise, and speak to them all that I command you.	waist	0.14705882352941174
-3X2YVV51PU46GLY3ILB2G8CH0TW1WS	bible	"Moreover you know also what Joab the son of Zeruiah did to me, even what he did to the two captains of the armies of Israel, to Abner the son of Ner, and to Amasa the son of Jether, whom he killed, and shed the blood of war in peace, and put the blood of war on his sash that was about his waist, and in his shoes that were on his feet.	waist	0.175
+3XH7ZM9YX2UJXUKCN4GP8FMJ6O59R2	bible	You therefore put your belt on your waist, arise, and speak to them all that I command you.	waist	0.14705882352941174
+3X2YVV51PU46GLY3ILB2G8CH0TW1WS	bible	Moreover you know also what Joab the son of Zeruiah did to me, even what he did to the two captains of the armies of Israel, to Abner the son of Ner, and to Amasa the son of Jether, whom he killed, and shed the blood of war in peace, and put the blood of war on his sash that was about his waist, and in his shoes that were on his feet.	waist	0.175
 3WA2XVDZEMH767D93RTDPYWY10CE6S	bible	This I say for your own profit; not that I may ensnare you, but for that which is appropriate, and that you may attend to the Lord without distraction.	distraction	0.1607142857142857
 3VGZ74AYTGGU62I1JDW4B19KA2XCGU	bible	In the day that he goes into the sanctuary, into the inner court, to minister in the sanctuary, he shall offer his sin offering, says the Lord Yahweh.	Lord	0.16666666666666669
 3UXQ63NLAAMRIP4WG4XPD98AOYJLB2	bible	Now, Lord our God, who has brought your people forth out of the land of Egypt with a mighty hand, and have gotten yourself renown, as at this day; we have sinned, we have done wickedly.	Lord	0.21052631578947367
@@ -74,7 +74,7 @@ id	subcorpus	sentence	token	complexity
 3J94SKDEKIP6VXZV2D8ORA0D5R55DB	bible	Jesus said to him, "Have I been with you such a long time, and do you not know me, Philip?	Philip	0.2678571428571429
 37SOB9Z0SSXMFU0J1BIJVQAY0663LT	bible	When they came up out of the water, the Spirit of the Lord caught Philip away, and the eunuch didn't see him any more, for he went on his way rejoicing.	Philip	0.36111111111111116
 3ZZAYRN1I6RZKW1ATI425KIQPATTOM	bible	They also brought out all her relatives, and they set them outside of the camp of Israel.	relatives	0.203125
-3IHWR4LC7DD6QQYJSPG2URQHZO4I8M	bible	"'None of you shall approach anyone who are his close relatives, to uncover their nakedness: I am Yahweh.	relatives	0.27941176470588236
+3IHWR4LC7DD6QQYJSPG2URQHZO4I8M	bible	None of you shall approach anyone who are his close relatives, to uncover their nakedness: I am Yahweh.	relatives	0.27941176470588236
 3D5G8J4N5A4UAGA7UUQG0CCYL3KTVI	bible	It happened, when he began to reign, as soon as he sat on his throne, that he struck all the house of Baasha: he didn't leave him a single one who urinates on a wall, neither of his relatives, nor of his friends.	relatives	0.3214285714285714
 3G9UA71JVVUYLND6029WSS9M1HB7JK	bible	Then Jonathan said to him, "Tomorrow is the new moon: and you will be missed, because your seat will be empty.	Tomorrow	0.20833333333333331
 3MIVREZQVHY32PO3EMIETYQULYFQKG	bible	When we burned incense to the queen of the sky, and poured out drink offerings to her, did we make her cakes to worship her, and pour out drink offerings to her, without our husbands?	husbands	0.21250000000000002
@@ -96,7 +96,7 @@ id	subcorpus	sentence	token	complexity
 3HRWUH63QU2FH9Q8R7MRNFC7JXX5NN	bible	therefore, behold, I will deliver you to the children of the east for a possession, and they shall set their encampments in you, and make their dwellings in you; they shall eat your fruit, and they shall drink your milk.	dwellings	0.2375
 3QREJ3J433XSBS8QMHAICCR0BSXLKR	bible	You shall not eat any blood, whether it is of bird or of animal, in any of your dwellings.	dwellings	0.25
 3KTCJ4SCVG1AB94PEJ5F7AAQ2PB1MQ	bible	This is a statute forever throughout your generations in all your dwellings.	dwellings	0.3125
-38O9DZ0A62NFBR1TA7YCNXN94XH62D	bible	"'These things shall be for a statute and ordinance to you throughout your generations in all your dwellings.	dwellings	0.34375
+38O9DZ0A62NFBR1TA7YCNXN94XH62D	bible	These things shall be for a statute and ordinance to you throughout your generations in all your dwellings.	dwellings	0.34375
 3PIOQ99R7YMW2OGNS8UZVR4NICPUNP	bible	They didn't see one another, neither did anyone rise from his place for three days; but all the children of Israel had light in their dwellings.	dwellings	0.3529411764705882
 34YWR3PJ28ALYWIBW73O4M7E431X0J	bible	Remember his marvelous works that he has done; his wonders, and the judgments of his mouth,	judgments	0.25
 3AFT28WXLF29BILZZ65YRDGHER0OIJ	bible	I will make Pathros desolate, and will set a fire in Zoan, and will execute judgments on No.	judgments	0.2833333333333333
@@ -105,9 +105,9 @@ id	subcorpus	sentence	token	complexity
 3XJOUITW8UR258EQ8VW6UPDQ49YTQD	bible	You shall eat it as barley cakes, and you shall bake it in their sight with dung that comes out of man.	dung	0.25
 3JVP4ZJHDPSO81TGXL3N1CKZGQSI0Z	bible	The second angel sounded, and something like a great burning mountain was thrown into the sea.	burning	0.25
 3S8A4GJRD33O8IZVYHINP2KK1TXV6T	bible	I am a brother to jackals, and a companion to ostriches.	companion	0.25
-3PR3LXCWSFZ3UQ6OW3MHXX8777PX9P	bible	However, knowing this, Jesus said to them, "Why do you trouble the woman?	trouble	0.26136363636363635
+3PR3LXCWSFZ3UQ6OW3MHXX8777PX9P	bible	However, knowing this, Jesus said to them, "Why do you trouble the woman?"	trouble	0.26136363636363635
 31YWE12TE0CZG7IVH6OXJ1H1CFC7XU	bible	So they were shut up to the day of their death, living in widowhood.	widowhood	0.26388888888888884
-3LCXHSGDLT6CT5B6A4WGQ3SQJP4ES9	bible	"Don't be afraid; for you shall not be ashamed: neither be confounded; for you shall not be disappointed: for you shall forget the shame of your youth; and the reproach of your widowhood you shall remember no more.	widowhood	0.31666666666666665
+3LCXHSGDLT6CT5B6A4WGQ3SQJP4ES9	bible	Don't be afraid; for you shall not be ashamed: neither be confounded; for you shall not be disappointed: for you shall forget the shame of your youth; and the reproach of your widowhood you shall remember no more.	widowhood	0.31666666666666665
 382GHPVPHSRQHMTYVJJ2998NEKB340	bible	Therefore they will carry away the abundance they have gotten, and that which they have stored up, over the brook of the willows.	abundance	0.2647058823529411
 3HRWUH63QU2FH9Q8R7MRNFC7JVWN50	bible	But sin, finding occasion through the commandment, produced in me all kinds of coveting.	occasion	0.35
 3R6RZGK0XFCQR29140DF8T4D058YVI	bible	Thus says Yahweh, the God of Israel: I made a covenant with your fathers in the day that I brought them forth out of the land of Egypt, out of the house of bondage, saying,	covenant	0.27380952380952384
@@ -139,7 +139,7 @@ id	subcorpus	sentence	token	complexity
 3SZYX62S5G0QEOYLB052RIQHJG257I	bible	all the inhabitants of the hill country from Lebanon to Misrephoth Maim, even all the Sidonians; them will I drive out from before the children of Israel: only allocate it to Israel for an inheritance, as I have commanded you.	Maim	0.4444444444444444
 3W0XM68YZPVFLL4MT7SZSXIMDKFK13	bible	They told Sisera that Barak the son of Abinoam was gone up to Mount Tabor.	Tabor	0.4852941176470589
 38EHZ67RIMS7FOUSW2QIEXEW4G0MGL	bible	It turned from Sarid eastward toward the sunrise to the border of Chisloth Tabor.	Tabor	0.5294117647058824
-3R5LWXWHR08I90TWA9SRPEUUBKKGXZ	bible	"Then you shall go on forward from there, and you shall come to the oak of Tabor; and three men shall meet you there going up to God to Bethel, one carrying three young goats, and another carrying three loaves of bread, and another carrying a bottle of wine:	Tabor	0.6029411764705882
+3R5LWXWHR08I90TWA9SRPEUUBKKGXZ	bible	Then you shall go on forward from there, and you shall come to the oak of Tabor; and three men shall meet you there going up to God to Bethel, one carrying three young goats, and another carrying three loaves of bread, and another carrying a bottle of wine:	Tabor	0.6029411764705882
 3MVY4USGB6NO9ADS6NM7BIQIBGKSI1	bible	For the judgment is against you; for you have been a snare at Mizpah, and a net spread on Tabor.	Tabor	0.6333333333333333
 3I01FDIL6M8EW0G8KU6QT3X1LH42DX	bible	He makes his feet like hinds' feet, and sets me on my high places.	hinds	0.5166666666666667
 3BAKUKE49HC18PHHJR1WT9408E0R1Y	biomed	The expression of Sam68 was not altered in aging bone marrow stromal cells or in senescencing WI-38 cells (unpublished data).	bone	0.02777777777777779
