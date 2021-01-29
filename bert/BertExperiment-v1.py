@@ -31,8 +31,8 @@ test_single_tsv = '../dataset/trial/lcp_single_trial.tsv'
 df_test_single = pd.read_csv(test_single_tsv, sep='\t', header=0, keep_default_na=False)
 print(f"{len(df_train_single)=}\n{len(df_test_single)=}")
 
-max_sent_len = 18
-model_hidden_size = 384
+max_sent_len = 48
+model_hidden_size = 768
 
 class Roberta(nn.Module):
     def __init__(self):
@@ -51,7 +51,7 @@ class Roberta(nn.Module):
         model_hidden_size = last_hidden_state.shape[2]
 
         x_dimension = seq_len * model_hidden_size
-        y_dimension = self.matrix_len // x_dimension
+        y_dimension = 1 #self.matrix_len // x_dimension
         last_hidden_state = last_hidden_state.reshape(b_size, (x_dimension * y_dimension))
 
         x = self.fc1(last_hidden_state)
@@ -69,14 +69,14 @@ tokenizer = RobertaTokenizer.from_pretrained("roberta-base")
 list_sentences = df_train_single["sentence"].tolist()
 tokens = df_train_single['token'].tolist()
 # Check for max sentence length instead of hardcoded 60
-# input_data = tokenizer(list_sentences, tokens, padding=True, truncation=True, max_length=max_sent_len, return_tensors='pt')
-input_data = tokenizer(tokens, padding=True, truncation=True, max_length=max_sent_len, return_tensors='pt')
+input_data = tokenizer(list_sentences, tokens, padding=True, truncation=True, max_length=max_sent_len, return_tensors='pt')
+# input_data = tokenizer(tokens, padding=True, truncation=True, max_length=max_sent_len, return_tensors='pt')
 target_data = df_train_single['complexity']
 
 # test dataset
 test_sentences = df_test_single["sentence"].tolist()
 test_tokens = df_test_single['token'].tolist()
-test_input_data = tokenizer(test_tokens, padding=True, truncation=True, max_length=max_sent_len, return_tensors='pt')
+test_input_data = tokenizer(test_sentences, test_tokens, padding=True, truncation=True, max_length=max_sent_len, return_tensors='pt')
 test_target_data = df_test_single['complexity']
 
 
@@ -126,7 +126,7 @@ import time
 
 criterion = nn.MSELoss()
 EPOCHS = 10
-BATCH_SIZE = 256
+BATCH_SIZE = 64
 optm = Adam(model.parameters(), lr = 0.001)
 
 dataset = WordcountDataset(input_data, target_data)
