@@ -125,14 +125,14 @@ from tqdm import tqdm
 import time
 
 criterion = nn.MSELoss()
-EPOCHS = 10
+EPOCHS = 3
 BATCH_SIZE = 64
 optm = Adam(model.parameters(), lr = 0.001)
 
 dataset = WordcountDataset(input_data, target_data)
-data_train = DataLoader(dataset = dataset, batch_size = BATCH_SIZE, shuffle = True)
+data_train = DataLoader(dataset = dataset, batch_size = BATCH_SIZE)
 test_dataset = WordcountDataset(test_input_data, test_target_data)
-data_test = DataLoader(dataset = test_dataset, batch_size = BATCH_SIZE, shuffle = True)
+data_test = DataLoader(dataset = test_dataset, batch_size = BATCH_SIZE)
 
 for epoch in range(EPOCHS):
     print(f"{epoch=}")
@@ -156,7 +156,7 @@ for epoch in range(EPOCHS):
     y_true = [test_dataset[i]['out'].item() for i in range(len(test_dataset))]
     y_pred = []
 
-    test_loader = DataLoader(dataset = test_dataset, batch_size = BATCH_SIZE, shuffle = True)
+    test_loader = DataLoader(dataset = test_dataset, batch_size = BATCH_SIZE)
     for bidx, batch in enumerate(test_loader):
         if bidx % 10 == 0:
             print(f"test {bidx=}")

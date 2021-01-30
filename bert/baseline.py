@@ -13,7 +13,7 @@ import time
 import pandas as pd
 
 from scipy import spatial
-print(os.listdir('dataset/train'))
+print(os.listdir('../dataset/train'))
 
 
 # ### Train data 
@@ -21,7 +21,7 @@ print(os.listdir('dataset/train'))
 # In[2]:
 
 
-train_single_tsv = 'dataset/train/lcp_single_train.tsv'
+train_single_tsv = '../dataset/train/lcp_single_train.tsv'
 df_train_single = pd.read_csv(train_single_tsv, sep='\t', header=0)
 
 
@@ -40,7 +40,7 @@ print(df_train_single['corpus'].value_counts())
 # In[4]:
 
 
-test_single_tsv = 'dataset/test/lcp_single_trial.tsv'
+test_single_tsv = '../dataset/trial/lcp_single_trial.tsv'
 df_test_single = pd.read_csv(test_single_tsv, sep='\t', header=0)
 
 
