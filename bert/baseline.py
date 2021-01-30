@@ -12,6 +12,8 @@ import numpy as np
 import time
 import pandas as pd
 
+from InferSent.models import InferSent
+
 from scipy import spatial
 print(os.listdir('../dataset/train'))
 
@@ -61,7 +63,7 @@ print(os.getcwd())
 # In[10]:
 
 
-glove_w2v_loc = 'InferSent/GloVe/glove.840B.300d.txt'
+glove_w2v_loc = '../InferSent/GloVe/glove.840B.300d.txt'
 with open(glove_w2v_loc,  "r", encoding="utf8") as lines:
     glove_w2v = {}
     for line in lines:
@@ -103,13 +105,13 @@ find_closest_embeddings(np.array(glove_w2v['king']) - np.array(glove_w2v['man'])
 # In[13]:
 
 
-from InferSent.models import InferSent
 
 
 # In[14]:
 
 
-model_pkl = 'InferSent/encoder/infersent1.pkl'
+
+model_pkl = '../InferSent/encoder/infersent1.pkl'
 params_model = {'bsize': 64, 'word_emb_dim': 300, 'enc_lstm_dim': 2048,
                 'pool_type': 'max', 'dpout_model': 0.0, 'version': 1}
 infer_sent_model = InferSent(params_model)
@@ -140,22 +142,11 @@ def get_embedding_for_context(ctx):
         ctx = [ctx]
     return infer_sent_model.encode(ctx, tokenize=True)
 
-start = time.time()
-get_embedding_for_context("This is a test sentence")
-print("Time for single prediction: {}".format(time.time() - start))
-
-get_embedding_for_context(["This is a test sentence"] * 3000)
-print("Time for pred of 3000 cases: {}".format(time.time() - start))
 
 
 # In[18]:
 
 
-print(len(all_sentences))
-print(len(all_sentence_embeddings))
-
-
-# In[19]:
 
 
 from sklearn.metrics.pairwise import cosine_similarity
@@ -347,11 +338,11 @@ from tqdm import tqdm
 import time
 
 criterion = nn.MSELoss()
-EPOCHS = 24
-BATCH_SIZE = 64
+EPOCHS = 30
+BATCH_SIZE = 192
 optm = Adam(net.parameters(), lr = 0.00001)
 
-data_train = DataLoader(dataset = train_dataset, batch_size = BATCH_SIZE, shuffle = True)
+data_train = DataLoader(dataset = train_dataset, batch_size = BATCH_SIZE)
 
 for epoch in range(EPOCHS):
     epoch_loss = 0
@@ -391,7 +382,7 @@ from sklearn.metrics import mean_absolute_error
 y_true = [test_dataset[i]['out'].item() for i in range(len(test_dataset))]
 y_pred = []
 
-test_loader = DataLoader(dataset = test_dataset, batch_size = BATCH_SIZE, shuffle = True)
+test_loader = DataLoader(dataset = test_dataset, batch_size = BATCH_SIZE)
 for bidx, batch in enumerate(test_loader):
         #start = time.time()
         x_train = batch['inp']
@@ -413,7 +404,7 @@ from sklearn.metrics import mean_absolute_error
 y_true = [train_dataset[i]['out'].item() for i in range(len(train_dataset))]
 y_pred = []
 
-test_loader = DataLoader(dataset = train_dataset, batch_size = BATCH_SIZE, shuffle = True)
+test_loader = DataLoader(dataset = train_dataset, batch_size = BATCH_SIZE)
 for bidx, batch in enumerate(test_loader):
         #start = time.time()
         x_train = batch['inp']
@@ -424,19 +415,4 @@ y_pred = [x.item() for i in range(len(y_pred)) for x in y_pred[i] ]
 mae = mean_absolute_error(y_true, y_pred)
 print("MAE for train data: ", mae)
 
-
-# #### MAE for total random
-
-# In[163]:
-
-
-from sklearn.metrics import mean_absolute_error
-import random
-
-y_true = [train_dataset[i]['out'].item() for i in range(len(train_dataset))]
-y_pred = [random.random() for i in range(len(train_dataset))]
-
-
-mae = mean_absolute_error(y_true, y_pred)
-print("Mean Absolute Error for train data: ", mae)
 
