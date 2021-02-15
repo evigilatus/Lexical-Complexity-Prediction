@@ -31,7 +31,7 @@ test_single_tsv = '../dataset/trial/lcp_single_trial.tsv'
 df_test_single = pd.read_csv(test_single_tsv, sep='\t', header=0, keep_default_na=False)
 print(f"{len(df_train_single)=}\n{len(df_test_single)=}")
 
-max_sent_len = 64
+max_sent_len = 18
 model_hidden_size = 768
 
 class Roberta(nn.Module):
@@ -81,15 +81,16 @@ def focus_token(list_sentences, tokens):
 list_sentences = df_train_single["sentence"].tolist()
 tokens = df_train_single['token'].tolist()
 list_sentences = focus_token(list_sentences, tokens)
-input_data = tokenizer(list_sentences, tokens, padding=True, truncation=True, max_length=max_sent_len, return_tensors='pt')
-# input_data = tokenizer(tokens, padding=True, truncation=True, max_length=max_sent_len, return_tensors='pt')
+#input_data = tokenizer(list_sentences, tokens, padding=True, truncation=True, max_length=max_sent_len, return_tensors='pt')
+input_data = tokenizer(tokens, tokens, padding=True, truncation=True, max_length=max_sent_len, return_tensors='pt')
 target_data = df_train_single['complexity']
 
 # test dataset
 test_sentences = df_test_single["sentence"].tolist()
 test_tokens = df_test_single['token'].tolist()
 test_sentences = focus_token(test_sentences, test_tokens)
-test_input_data = tokenizer(test_sentences, test_tokens, padding=True, truncation=True, max_length=max_sent_len, return_tensors='pt')
+# test_input_data = tokenizer(test_sentences, test_tokens, padding=True, truncation=True, max_length=max_sent_len, return_tensors='pt')
+test_input_data = tokenizer(test_tokens, test_tokens, padding=True, truncation=True, max_length=max_sent_len, return_tensors='pt')
 test_target_data = df_test_single['complexity']
 
 
