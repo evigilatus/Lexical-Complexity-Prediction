@@ -174,6 +174,7 @@ import math
 import nltk
 
 from collections import defaultdict
+from functools import lru_cache
 from nltk.stem.porter import PorterStemmer
 
 reader = csv.reader(open('SUBTLEX.csv', 'r'))
@@ -187,9 +188,10 @@ for row in reader:
 
 frequency = {k: math.log2(v) for k, v in frequency.items()}
 
+@lru_cache(8000)
 def get_handcrafted_features(word):
     word = str(word)
-    return [len(word), syllables.estimate(word), frequency.get(stemmer.stem(word.lower())) or 0]
+    return [len(word), syllables.estimate(word), frequency.get(stemmer.stem(word.lower())) or 0, len([_ for _ in word if _.isupper()])/len(word)]
 
 get_handcrafted_features("Basketball")
 

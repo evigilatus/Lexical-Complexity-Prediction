@@ -2,3 +2,4 @@ Dataset/
 InferSent
 .ipynb_checkpoints
 .idea
+__pycache__/
